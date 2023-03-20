@@ -4,6 +4,7 @@
 	import MultiSelect from '../elements/multiSelect.svelte';
   import editIcon from '../../../assets/svg/edit.svg';
   import deleteIcon from '../../../assets/svg/trash.svg';
+  import Checkbox from '../dragAndDrop/column.svelte';
   interface Row {
     [key: string]: any;
     checked: boolean;
@@ -118,7 +119,7 @@ function updateColumn(){
   <div class="overflow-x-auto shadow-lg rounded-lg">
     <div class='flex  justify-between items-center p-2'>
       <div class="flex flex-1">
-        <input type="text" class="border rounded py-1 px-3 w-full" placeholder="Search" bind:value={searchTerm}/>
+        <input type="text" class="border caret-cyan-500 outline-cyan-500 rounded py-1 px-3 w-full" placeholder="Search" bind:value={searchTerm}/>
       </div>
      
       <div class="flex justify-between items-center space-x-2 px-2">
@@ -144,11 +145,11 @@ function updateColumn(){
     </div>
     <table class="w-full table-auto">
       <thead class="bg-gray-50 border">
-        <tr class="text-gray-500 uppercase text-xs leading-normal">
+        <tr class="text-gray-900 uppercase text-xs leading-normal">
           <th class="py-2 px-3 text-left"> 
             <input
               type="checkbox"
-              class="form-checkbox text-blue-500"
+              class="h-4 w-4 rounded  text-cyan-500  focus:ring-0 border-cyan-500"
               bind:checked={masterToggle}
               bind:indeterminate={masterIndeterminate}
               on:change={toggleAll}
@@ -163,7 +164,7 @@ function updateColumn(){
                   {#if sortBy === column.key}
                     <span>{sortDirection === 'asc' ? '▲' : '▼'}</span>
                   {:else}
-                    <span></span>
+                    <span class=""></span>
                   {/if}
                 {/if}
               </div>
@@ -177,14 +178,15 @@ function updateColumn(){
       </thead>
       <tbody class="text-gray-500 text-sm font-light">
         {#each filteredRows as item}
-          <tr class="{item.checked ? 'bg-blue-100' : ''}">
+          <tr class="{item.checked ? 'bg-cyan-50' : ''}">
             <td class="py-2 px-3">
               <input
                 type="checkbox"
-                class="form-checkbox text-blue-500"
+                class=" h-4 w-4 rounded  text-cyan-500  focus:ring-0 border-cyan-500"
                 bind:checked={item.checked}
                 on:change={() => toggleRow(item)}
               />
+              
             </td>
             {#each Object.entries(item) as [key, value]}
               {#if key !== 'checked' && availableColumns.includes(key)}
@@ -192,7 +194,7 @@ function updateColumn(){
               {/if}
             {/each}
             {#if actions}
-              <td class="py-2 px-3">
+              <td class=" flex justify-center items py-2 px-3 space-x-2">
                 {#each actionList as action}
                 {#if action === 'Edit'}
                   <button class="border py-1 px-3 rounded" ><img src='{editIcon}' class="w-4" alt=""/></button>

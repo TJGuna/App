@@ -26,7 +26,7 @@ let availableColumns = ['id','name', 'age', 'email', 'full_address', 'city', 'ac
  const rows = table;
 </script>
 <PageHeader Title="Orders" >
-        <button class="p-2 border rounded text-white bg-[#62CDFF]">Add New Order</button>
+        <button class="px-2 py-1 border rounded text-white bg-[#62CDFF]">Add New Order</button>
 </PageHeader>
 <PageBody>
     <Table {columns} {rows} {availableColumns} {searchableColumns} {actions} {actionList} {bulckActions} />
